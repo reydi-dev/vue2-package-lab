@@ -67,7 +67,9 @@ The sandbox could not read the system OpenSSL configuration, so validation comma
 - The project is MIT licensed to Mohammad Reza Dehghani. README includes exact quickstart/test commands, the four-page architecture, screenshots, and a prominent link to this report.
 - `.gitignore` excludes dependencies, build output, test/report output, coverage, local tools, environment files, npm credentials, local overrides, keys, and certificates.
 - A source/documentation scan found only deterministic `example.test` fixture identities and the local `/api/users` route; no company endpoint, company data, secret, token, or authentication configuration was added.
-- The GitHub Actions workflow was inspected locally but has not been executed on a GitHub-hosted runner because this task intentionally creates no remote.
+- Public remote: <https://github.com/reydi-dev/vue2-package-lab>. Initial commit `78e68af` is on `main`.
+- GitHub Actions run [`39126675745`](https://github.com/reydi-dev/vue2-package-lab/actions/runs/39126675745) completed successfully for the initial public commit.
+- The central release and future-package procedure is maintained in `WORKFLOW.md`.
 
 ## Package issues
 
@@ -101,13 +103,12 @@ No functional package defect was observed in the browser scenarios above. The la
 - Vue 2.7.16 and Vuetify 2.6.16 are deprecated/EOL; npm prints both warnings during clean install.
 - `npm audit` reports 8 findings for the selected legacy dependency tree. No force-upgrade was applied because it could change compatibility and is outside this consumer test.
 - Vite reports one large-chunk warning (the application, Vuetify, icons and table are currently bundled together). This is a lab optimization opportunity, not a package behavior failure.
-- `/usr/bin/git` is present but unusable on this machine because Xcode Command Line Tools are missing: `xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools)`. Read-only metadata inspection shows `HEAD` points to `refs/heads/main`, but there is no branch ref, packed ref, index, or remote section in `.git/config`. The object database contains three unreachable agent-host checkpoint commits (`baseline checkpoint`, `turn 1 start`, and `turn 1`), but no ref selects any of them, so there is no verifiable current commit or branch history. No commit was created and no `.git` metadata was manually changed during publication-readiness work.
+- Git 2.39.2 is available when commands run outside the sandbox. The repository has public remote `origin`, branch `main`, and initial commit `78e68af`; the working tree was clean before this documentation change.
 
 ## Not yet tested
 
 - Screen-reader testing with VoiceOver/NVDA and full keyboard-only audit beyond visible focus styling.
 - Safari/WebKit and Firefox engine compatibility; automated tests use Playwright-managed Chromium.
-- An actual GitHub-hosted Actions run; the workflow cannot run until the repository is intentionally connected to GitHub.
 - Very large data sets, long-duration soak tests, and network conditions beyond deterministic 0/500/1500 ms latency.
 - Custom persistence backends other than the package local-storage adapter.
 - CSV content for non-ASCII/large exports beyond successful browser download.
