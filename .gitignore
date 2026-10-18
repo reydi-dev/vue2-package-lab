@@ -1,0 +1,16 @@
+node_modules/
+dist/
+playwright-report/
+test-results/
+blob-report/
+coverage/
+.tools/
+.DS_Store
+*.log
+.env
+.env.*
+!.env.example
+.npmrc
+*.local
+*.key
+*.pem

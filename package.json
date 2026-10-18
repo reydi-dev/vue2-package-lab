@@ -1,0 +1,33 @@
+{
+  "name": "vue2-package-lab",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "author": "Mohammad Reza Dehghani",
+  "engines": {
+    "node": ">=20"
+  },
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "vue-tsc --noEmit",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "@mdi/font": "7.4.47",
+    "vue": "2.7.16",
+    "vue-router": "3.6.5",
+    "vuetify": "2.6.16",
+    "vue2-smart-datatable": "0.1.0-beta.2"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.55.0",
+    "@types/node": "22.13.10",
+    "@vitejs/plugin-vue2": "2.3.3",
+    "typescript": "5.9.2",
+    "vite": "6.1.0",
+    "vue-tsc": "2.2.12"
+  }
+}
