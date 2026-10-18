@@ -19,8 +19,8 @@
     "@mdi/font": "7.4.47",
     "vue": "2.7.16",
     "vue-router": "3.6.5",
-    "vuetify": "2.6.16",
-    "vue2-smart-datatable": "0.1.0-beta.2"
+    "vue2-smart-datatable": "0.1.0-beta.3",
+    "vuetify": "2.6.16"
   },
   "devDependencies": {
     "@playwright/test": "1.55.0",

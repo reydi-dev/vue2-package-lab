@@ -1,6 +1,6 @@
 # Vue 2 Package Lab
 
-A standalone consumer test bench for published Vue 2 packages. The first package under test is the npm release `vue2-smart-datatable@0.1.0-beta.2`—not a copied component or local source link. All users and the `/api/users` endpoint are deterministic local fixtures; this repository contains no company API, credentials, authentication integration, or private data.
+A standalone consumer test bench for published Vue 2 packages. The first package under test is the npm release `vue2-smart-datatable@0.1.0-beta.3`—not a copied component or local source link. All users and the `/api/users` endpoint are deterministic local fixtures; this repository contains no company API, credentials, authentication integration, or private data.
 
 **Release and package-onboarding process: [WORKFLOW.md](./WORKFLOW.md).**
 
