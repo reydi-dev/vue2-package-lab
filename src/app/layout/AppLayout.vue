@@ -24,8 +24,8 @@
       </div>
       <v-spacer />
       <div class="package-meta d-none d-sm-flex">
-        <span><strong>vue2-smart-datatable</strong> <code>0.1.0-beta.2</code></span>
-        <a href="https://www.npmjs.com/package/vue2-smart-datatable/v/0.1.0-beta.2" target="_blank" rel="noreferrer">npm</a>
+        <span><strong>vue2-smart-datatable</strong> <code>0.1.0-beta.3</code></span>
+        <a href="https://www.npmjs.com/package/vue2-smart-datatable/v/0.1.0-beta.3" target="_blank" rel="noreferrer">npm</a>
         <a href="https://github.com/reydi-dev/vue2-smart-datatable#readme" target="_blank" rel="noreferrer">Docs</a>
       </div>
     </v-app-bar>
@@ -33,8 +33,8 @@
     <v-main class="lab-main">
       <v-container fluid class="lab-container">
         <div class="package-meta package-meta--mobile d-flex d-sm-none mb-4">
-          <span><strong>vue2-smart-datatable</strong> <code>0.1.0-beta.2</code></span>
-          <a href="https://www.npmjs.com/package/vue2-smart-datatable/v/0.1.0-beta.2" target="_blank" rel="noreferrer">npm</a>
+          <span><strong>vue2-smart-datatable</strong> <code>0.1.0-beta.3</code></span>
+          <a href="https://www.npmjs.com/package/vue2-smart-datatable/v/0.1.0-beta.3" target="_blank" rel="noreferrer">npm</a>
           <a href="https://github.com/reydi-dev/vue2-smart-datatable#readme" target="_blank" rel="noreferrer">Docs</a>
         </div>
         <router-view />

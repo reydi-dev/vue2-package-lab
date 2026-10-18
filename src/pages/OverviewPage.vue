@@ -44,8 +44,8 @@
         <v-card outlined class="lab-card">
           <v-card-title>Published package</v-card-title>
           <v-card-text class="body-copy">
-            Installed from npm at the exact version <code>0.1.0-beta.2</code>.
-            <div class="mt-4"><a href="https://www.npmjs.com/package/vue2-smart-datatable/v/0.1.0-beta.2" target="_blank" rel="noreferrer">npm package</a> · <a href="https://github.com/reydi-dev/vue2-smart-datatable" target="_blank" rel="noreferrer">public repository</a></div>
+            Installed from npm at the exact version <code>0.1.0-beta.3</code>.
+            <div class="mt-4"><a href="https://www.npmjs.com/package/vue2-smart-datatable/v/0.1.0-beta.3" target="_blank" rel="noreferrer">npm package</a> · <a href="https://github.com/reydi-dev/vue2-smart-datatable" target="_blank" rel="noreferrer">public repository</a></div>
           </v-card-text>
         </v-card>
       </v-col>
@@ -66,7 +66,7 @@ export default Vue.extend({
     ],
     environment: [
       { label: 'Vue', value: '2.7.16' }, { label: 'Vuetify', value: '2.6.16' }, { label: 'Router', value: '3.6.5' },
-      { label: 'Vite', value: '6.1.0' }, { label: 'TypeScript', value: '5.9.2' }, { label: 'Package', value: 'beta.2' },
+      { label: 'Vite', value: '6.1.0' }, { label: 'TypeScript', value: '5.9.2' }, { label: 'Package', value: 'beta.3' },
     ],
     checklist: ['Local data rendering and controls', 'Provider mode through GET /api/users', 'Empty and error states with Retry', 'Narrow viewport and RTL rendering', 'Column visibility, persistence, and CSV export'],
   }),

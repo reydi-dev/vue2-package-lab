@@ -22,7 +22,7 @@
 
 | شناسه در آزمایشگاه | پکیج npm | نسخهٔ مصرف‌شده | ریپوی سورس | demo عمومی | صفحات/سناریوها | وضعیت |
 | --- | --- | --- | --- | --- | --- | --- |
-| `smart-datatable` | `vue2-smart-datatable` | `0.1.0-beta.2` | <https://github.com/reydi-dev/vue2-smart-datatable> | <https://reydi-dev.github.io/vue2-smart-datatable/> | `/local`، `/server`، `/scenarios` | فعال |
+| `smart-datatable` | `vue2-smart-datatable` | `0.1.0-beta.3` | <https://github.com/reydi-dev/vue2-smart-datatable> | <https://reydi-dev.github.io/vue2-smart-datatable/> | `/local`، `/server`، `/scenarios` | فعال |
 | _برای پکیج بعدی یک ردیف اضافه شود_ | — | — | — | — | — | برنامه‌ریزی‌نشده |
 
 در هر ارتقای نسخه، ستون «نسخهٔ مصرف‌شده»، hardcodeهای UI/CI، `package.json`، lockfile و `TEST_REPORT.md` را با هم به‌روزرسانی کنید.
@@ -276,7 +276,7 @@ npm install --save-exact "$PACKAGE_NAME@$NEXT_VERSION"
 همهٔ hardcodeهای نسخهٔ قبلی را پیدا کنید. نسخهٔ guard در `.github/workflows/ci.yml`، registry همین فایل، UI/README و گزارش باید هماهنگ شوند:
 
 ```sh
-export OLD_VERSION="0.1.0-beta.2"
+export OLD_VERSION="0.1.0-beta.3"
 grep -RIn --exclude-dir=.git --exclude-dir=node_modules --exclude-dir=dist --exclude-dir=.tools "$OLD_VERSION" .
 ```
 

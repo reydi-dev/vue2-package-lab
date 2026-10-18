@@ -1,7 +1,7 @@
 # Vue 2 Package Lab — Test Report
 
 Date: 2026-10-19
-Package under test: `vue2-smart-datatable@0.1.0-beta.2` installed from npm
+Package under test: `vue2-smart-datatable@0.1.0-beta.3` installed from npm
 
 ## Exact environment
 
@@ -16,7 +16,7 @@ Package under test: `vue2-smart-datatable@0.1.0-beta.2` installed from npm
 | TypeScript | 5.9.2 |
 | vue-tsc | 2.2.12 |
 | Playwright | 1.55.0, managed Chromium 140.0.7339.16 (build 1187) |
-| vue2-smart-datatable | 0.1.0-beta.2 |
+| vue2-smart-datatable | 0.1.0-beta.3 |
 
 `npm ls vue vuetify vite vue2-smart-datatable --all` showed every package using the same deduped `vue@2.7.16`. The production JavaScript contains one `Vue.js v2.7.16` signature. Vite also aliases bare `vue` imports to `node_modules/vue/dist/vue.runtime.esm.js` and sets `dedupe: ['vue']`.
 
@@ -28,8 +28,7 @@ Package under test: `vue2-smart-datatable@0.1.0-beta.2` installed from npm
 | `npx playwright install chromium` | BLOCKED ON THIS HOST — pinned Playwright reports that its Chromium build is unsupported on macOS 13; Linux CI uses the documented installer. The existing managed Chromium build 1187 in ignored `.tools/ms-playwright` was used for the local browser run. |
 | `npm run typecheck` | PASS — `vue-tsc --noEmit`, exit 0. |
 | `npm run build` | PASS — Vite transformed 35 modules and emitted the production app. One non-blocking warning reported a JavaScript chunk over 500 kB. |
-| `PLAYWRIGHT_BROWSERS_PATH="$PWD/.tools/ms-playwright" npm run test:e2e` | PASS — 10/10 browser tests in 1.3 minutes using the `desktop-chromium` and `mobile-chromium` projects, a fresh forced Vite server on port 4176, and no system Chrome channel. |
-| `npm run preview -- --host 127.0.0.1 --port 4174` | PASS — production preview opened; `/server` fetched `/api/users`, showed 10 rows and total 140, and did not render a blank page. |
+| `PLAYWRIGHT_BROWSERS_PATH="$PWD/.tools/ms-playwright" npm run test:e2e` | PASS — 10/10 browser tests in 37.6 seconds using the `desktop-chromium` and `mobile-chromium` projects, a fresh forced Vite server on port 4176, and no system Chrome channel. |
 | `npm ls vue vuetify vite vue2-smart-datatable --all` | PASS — a single deduped Vue 2.7.16 installation. |
 | `grep -R 'file:' package.json package-lock.json` | PASS — no local/file dependency or source-repository alias. |
 
@@ -55,48 +54,31 @@ The sandbox could not read the system OpenSSL configuration or bind a local test
 | RTL | PASS | Test toggles the documented `direction` prop and verifies `dir="rtl"` on the table root. |
 | Column visibility persistence | PASS | Email is hidden, page is refreshed, and the column remains hidden. |
 | CSV export | PASS | Browser receives a real `.csv` download from the published exporter. |
-| Production preview | PASS | Provider-backed server table rendered from `dist` with a successful local API response. |
+| Production preview | NOT RE-RUN FOR BETA.3 | Production build passed, but a separate preview-server smoke check was not requested or run for this adoption. |
 
 ## Public repository readiness
 
 - `playwright.config.ts` uses the Playwright-managed default Chromium browser and starts `npm run dev` on the dedicated test port 4176 with `--force`, `--strictPort`, and `reuseExistingServer: false`. This prevents candidate tests from attaching to a stale port-4173 dev server or stale optimized dependencies. It contains no `.tools` path, `OPENSSL_CONF`, or system Chrome channel.
 - `.github/workflows/ci.yml` performs `npm ci`, installs Chromium with OS dependencies, then runs typecheck, build, and browser tests on pushes and pull requests to `main`.
-- CI also fails if `package.json` stops being private or if `vue2-smart-datatable` is no longer pinned to the exact published version `0.1.0-beta.2`.
+- CI also fails if `package.json` stops being private or if `vue2-smart-datatable` is no longer pinned to the exact published version `0.1.0-beta.3`.
 - The workflow uses read-only repository permissions and uploads the generated Playwright report only as a short-lived Actions artifact when a job fails.
-- `package.json` remains `private: true`, preventing accidental npm publication while allowing the GitHub repository itself to be public. The tested table dependency remains the exact npm version `0.1.0-beta.2`.
+- `package.json` remains `private: true`, preventing accidental npm publication while allowing the GitHub repository itself to be public. The tested table dependency is the exact npm version `0.1.0-beta.3`.
 - The project is MIT licensed to Mohammad Reza Dehghani. README includes exact quickstart/test commands, the four-page architecture, screenshots, and a prominent link to this report.
 - `.gitignore` excludes dependencies, build output, test/report output, coverage, local tools, environment files, npm credentials, local overrides, keys, and certificates.
 - A source/documentation scan found only deterministic `example.test` fixture identities and the local `/api/users` route; no company endpoint, company data, secret, token, or authentication configuration was added.
 - Public remote: <https://github.com/reydi-dev/vue2-package-lab>. Initial commit `78e68af` is on `main`.
-- GitHub Actions run [`39126675745`](https://github.com/reydi-dev/vue2-package-lab/actions/runs/39126675745) completed successfully for the initial public commit.
+- GitHub Actions run [`39171813830`](https://github.com/reydi-dev/vue2-package-lab/actions/runs/39171813830) completed successfully for lab `main` immediately before the beta.3 adoption branch.
 - The central release and future-package procedure is maintained in `WORKFLOW.md`.
 
-## Package issues
+## Publication and packaging findings
 
-### 1. Published README links to documentation files absent from the npm package
+- Source release commit: [`e64b8e492f5609284f02bf734c6b5d0f6d5962a2`](https://github.com/reydi-dev/vue2-smart-datatable/commit/e64b8e492f5609284f02bf734c6b5d0f6d5962a2), merged through [PR 37](https://github.com/reydi-dev/vue2-smart-datatable/pull/37).
+- Registry verification: `vue2-smart-datatable@0.1.0-beta.3`, shasum `a0c7d83a77085343e583b2e0d52e7649759c988e`; `beta` points to beta.3 and `latest` remains beta.2.
+- FIXED from beta.2: the published beta.3 artifact includes `docs/api.md`, `docs/providers.md`, `docs/adapters.md`, `docs/roadmap.md`, and the other declared documentation files, so README-relative documentation links resolve inside the installed package.
+- FIXED from beta.2: `dist/types/index.d.ts` no longer imports the absent `./styles/index.scss` path.
+- Package-shape verification found the expected ESM/CJS bundles, CSS, declarations, documentation, changelog, license, security and contribution files. The installed package is a real npm directory, not a symlink or local alias.
 
-- Severity: Medium (consumer documentation/discoverability)
-- Reproduction:
-  1. Install `vue2-smart-datatable@0.1.0-beta.2` from npm.
-  2. Open `node_modules/vue2-smart-datatable/README.md`.
-  3. Follow relative links such as `docs/api.md`, `docs/providers.md`, `docs/adapters.md`, and `docs/roadmap.md`.
-  4. Inspect the package contents; no `docs/` directory is published.
-- Expected: linked consumer documentation is shipped, or README links use absolute public repository URLs.
-- Actual: the links target missing files inside the installed package.
-- Lab treatment: no workaround was hidden in the application. Provider behavior was implemented from the installed README example and installed type declarations, and this packaging defect is recorded here.
-
-### 2. Root declaration imports a non-published stylesheet source path
-
-- Severity: Low (package integrity/tooling compatibility)
-- Reproduction:
-  1. Inspect `node_modules/vue2-smart-datatable/dist/types/index.d.ts`.
-  2. It contains `import './styles/index.scss'`.
-  3. Inspect `node_modules/vue2-smart-datatable/dist/types`; that stylesheet path is absent.
-- Expected: every relative import in emitted declarations resolves to a published file, or the source-style side-effect import is omitted from declarations.
-- Actual: the declaration points to a file not present in the npm artifact.
-- Observed impact: this lab's `vue-tsc` run still passes, but stricter declaration consumers or packaging tools may flag the dangling import.
-
-No functional package defect was observed in the browser scenarios above. The lab contains no patch, copied component, local alias, or behavioral workaround for the package.
+No functional package defect was observed in the beta.3 browser scenarios above. The lab contains no patch, copied component, local alias, or behavioral workaround for the package.
 
 ## Environment and security observations
 
