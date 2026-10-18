@@ -50,7 +50,7 @@ npm run preview     # production preview on 127.0.0.1:4174
 npm run test:e2e    # all Playwright tests using managed Chromium
 ```
 
-On a fresh machine or after changing Playwright versions, run `npx playwright install chromium` before `npm run test:e2e`. Linux CI uses `npx playwright install --with-deps chromium` to install Chromium and its OS dependencies.
+On a fresh machine or after changing Playwright versions, run `npx playwright install chromium` before `npm run test:e2e`. Linux CI uses `npx playwright install --with-deps chromium` to install Chromium and its OS dependencies. E2E runs start a fresh Vite server on the test-only port `4176` with forced dependency optimization and never attach to an existing dev server.
 
 Browser coverage includes all routes, local and server table behavior, empty/error/Retry, stale-response protection, persistence, CSV download, 360 px mobile, 768 px tablet, and RTL. Detailed outcomes and known package issues are recorded in [TEST_REPORT.md](./TEST_REPORT.md).
 

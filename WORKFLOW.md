@@ -159,6 +159,8 @@ npm run build
 npm run test:e2e
 ```
 
+`test:e2e` یک Vite server ایزوله روی پورت اختصاصی تست اجرا می‌کند، cache بهینه‌سازی dependencyها را با `--force` تازه می‌سازد و server موجود را reuse نمی‌کند. بنابراین server قدیمی dev یا cache نسخهٔ قبلی پکیج نباید وارد نتیجهٔ اعتبارسنجی tarball شود؛ اگر پورت تست اشغال باشد، `--strictPort` آزمون را صریحاً fail می‌کند.
+
 در موفقیت یا شکست، آزمایشگاه را به dependency منتشرشدهٔ lockfile برگردانید و پاکی Git را اثبات کنید:
 
 ```sh

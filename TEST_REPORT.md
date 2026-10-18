@@ -1,6 +1,6 @@
 # Vue 2 Package Lab — Test Report
 
-Date: 2026-10-18
+Date: 2026-10-19
 Package under test: `vue2-smart-datatable@0.1.0-beta.2` installed from npm
 
 ## Exact environment
@@ -24,16 +24,16 @@ Package under test: `vue2-smart-datatable@0.1.0-beta.2` installed from npm
 
 | Command | Actual result |
 | --- | --- |
-| `npm ci --ignore-scripts` | PASS — 52 packages installed from `package-lock.json` using an ignored local cache; npm reported 8 audit findings (2 low, 1 moderate, 5 high) in this EOL Vue 2 dependency tree. |
-| `npx playwright install chromium` | PASS — downloaded Playwright-managed Chromium 140.0.7339.16, build 1187. |
+| `npm ci` | PASS — 52 packages installed from `package-lock.json` using an ignored local cache. |
+| `npx playwright install chromium` | BLOCKED ON THIS HOST — pinned Playwright reports that its Chromium build is unsupported on macOS 13; Linux CI uses the documented installer. The existing managed Chromium build 1187 in ignored `.tools/ms-playwright` was used for the local browser run. |
 | `npm run typecheck` | PASS — `vue-tsc --noEmit`, exit 0. |
 | `npm run build` | PASS — Vite transformed 35 modules and emitted the production app. One non-blocking warning reported a JavaScript chunk over 500 kB. |
-| `npm run test:e2e` | PASS — 10/10 browser tests in 47.8 seconds using the `desktop-chromium` and `mobile-chromium` projects; no system Chrome channel configured. |
+| `PLAYWRIGHT_BROWSERS_PATH="$PWD/.tools/ms-playwright" npm run test:e2e` | PASS — 10/10 browser tests in 1.3 minutes using the `desktop-chromium` and `mobile-chromium` projects, a fresh forced Vite server on port 4176, and no system Chrome channel. |
 | `npm run preview -- --host 127.0.0.1 --port 4174` | PASS — production preview opened; `/server` fetched `/api/users`, showed 10 rows and total 140, and did not render a blank page. |
 | `npm ls vue vuetify vite vue2-smart-datatable --all` | PASS — a single deduped Vue 2.7.16 installation. |
 | `grep -R 'file:' package.json package-lock.json` | PASS — no local/file dependency or source-repository alias. |
 
-The sandbox could not read the system OpenSSL configuration, so validation commands in this agent environment used `OPENSSL_CONF=/dev/null`; this is not present in project scripts, Playwright configuration, README commands, or CI. The first clean-install attempt also encountered root-owned files in the user's global npm cache, so the successful rerun used the ignored `.tools/npm-cache` rather than changing global ownership or using `sudo`. Normal developer and CI environments use the README commands unchanged.
+The sandbox could not read the system OpenSSL configuration or bind a local test port, so validation commands in this agent environment used `OPENSSL_CONF=/dev/null` and browser tests ran outside the sandbox; neither workaround is present in project scripts, Playwright configuration, README commands, or CI. The clean install used the ignored `.tools/npm-cache`. The current macOS host cannot download the pinned Chromium build through plain `npx playwright install chromium`, so the successful rerun used the already-installed Playwright-managed build 1187 from ignored `.tools/ms-playwright`; normal supported developer machines and Linux CI use the README commands unchanged.
 
 ## Scenario matrix
 
@@ -59,7 +59,7 @@ The sandbox could not read the system OpenSSL configuration, so validation comma
 
 ## Public repository readiness
 
-- `playwright.config.ts` uses the Playwright-managed default Chromium browser and starts `npm run dev` normally. It contains no `.tools` path, `OPENSSL_CONF`, or system Chrome channel.
+- `playwright.config.ts` uses the Playwright-managed default Chromium browser and starts `npm run dev` on the dedicated test port 4176 with `--force`, `--strictPort`, and `reuseExistingServer: false`. This prevents candidate tests from attaching to a stale port-4173 dev server or stale optimized dependencies. It contains no `.tools` path, `OPENSSL_CONF`, or system Chrome channel.
 - `.github/workflows/ci.yml` performs `npm ci`, installs Chromium with OS dependencies, then runs typecheck, build, and browser tests on pushes and pull requests to `main`.
 - CI also fails if `package.json` stops being private or if `vue2-smart-datatable` is no longer pinned to the exact published version `0.1.0-beta.2`.
 - The workflow uses read-only repository permissions and uploads the generated Playwright report only as a short-lived Actions artifact when a job fails.
